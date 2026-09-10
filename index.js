@@ -137,7 +137,6 @@ function redirecionarAdminErro(res, ano, erro) {
 }
 
 app.get(`${BASE_PATH}/cardapio`, async (req, res) => {
-    
     const agora = new Date();
     const ano = agora.getFullYear();
     const mes = agora.getMonth() + 1;
@@ -182,7 +181,13 @@ app.get(`${BASE_PATH}/cardapio/:ano/:mes`, async (req, res) => {
     res.download(arquivo, `cardapio-${ano}-${mes.slug}.pdf`);
 });
 
+app.get(`${BASE_PATH}`, (req, res) => {
+    res.render('index', { basePath: BASE_PATH });
+});
 
+app.get(`${BASE_PATH}/contato`, (req, res) => {
+    res.render('contato', { basePath: BASE_PATH });
+});
 
 app.get(`${BASE_PATH}/sobre`, (req, res) => {
     res.render('sobre', { basePath: BASE_PATH });
