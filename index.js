@@ -185,6 +185,11 @@ app.get(`${BASE_PATH}`, (req, res) => {
     res.render('index', { basePath: BASE_PATH });
 });
 
+app.get('/', (req, res) => {
+    res.redirect('/restaurante');
+});
+
+
 app.get(`${BASE_PATH}/contato`, (req, res) => {
     res.render('contato', { basePath: BASE_PATH });
 });
