@@ -185,13 +185,8 @@ app.get(`${BASE_PATH}`, (req, res) => {
     res.render('index', { basePath: BASE_PATH });
 });
 
-app.use((req, res) => {
-    if (req.path === '/' || req.path === '' || !req.path) {
-        return res.redirect('/restaurante');
-    }
-    
-    console.log('Rota não encontrada:', req.originalUrl || req.url);
-    res.status(404).send('404');
+app.get('/', (req, res) => {
+    res.redirect('/restaurante');
 });
 
 
