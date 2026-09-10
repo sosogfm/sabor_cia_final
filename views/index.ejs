@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="manifest" href="<%= basePath %>/manifest.json">
+    <meta name="theme-color" content="#1e6b47">
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('<%= basePath %>/service-worker.js');
+        }
+    </script>
+
+    <link rel="stylesheet" href="<%= basePath %>/assets/css/style.css">
+
+    <link rel="icon" type="image/x-icon" href="<%= basePath %>/assets/img/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <title>Sabor & Cia</title>
+
+</head>
+
+<body>
+
+    <nav id="navbar">
+        <div class="logo">
+            <a href="<%= basePath %>">
+                <img src="assets/img/logo.png" alt="Sabor & Cia">
+            </a>
+        </div>
+        <ul id="menu">
+            <li><a href="<%= basePath %>/sobre" class="hover-nav">Sobre Nós</a></li>
+            <li><a href="<%= basePath %>/contato" class="hover-nav">Contato</a></li>
+        </ul>
+    </nav>
+
+    <main id="container">
+
+        <section class="hero">
+            <div class="hero-text">
+                <!-- <span class="badge">🌿 IFC Videira</span> -->
+                <h1><span class="destaque">Sabor & Cia</span></h1>
+                <p>Um espaço pensado para transformar cada refeição em uma experiência especial. Confira nosso cardápio
+                    mensal e venha nos visitar!</p>
+            </div>
+            <div class="hero-deco">
+                <div class="circulo c1"></div>
+                <div class="circulo c2"></div>
+                <div class="emoji-float">🍽️</div>
+            </div>
+        </section>
+
+
+        <section class="info-rapida">
+            <div class="info-card">
+                <span class="info-icon">🕐</span>
+                <div>
+                    <strong>Horário</strong>
+                    <p>Seg–Sex, 07h–21h</p>
+                </div>
+            </div>
+            <div class="info-card">
+                <span class="info-icon">📅</span>
+                <div>
+                    <strong>Cardápio</strong>
+                    <p>Atualizado todo mês</p>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="secao-cardapio" id="cardapio">
+            <div class="cardapio-header">
+                <h2>Cardápio do Mês</h2>
+                <span class="mes-badge" id="mes-atual"></span>
+            </div>
+            <p>Clique abaixo para baixar o cardápio completo do mês!</p>
+            <a id="link-cardapio" href="<%= basePath %>/cardapio" class="btn-principal">⬇ Baixar Cardápio em PDF</a>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>© 2026 Sabor & Cia · Fábrica de Software IFC Videira</p>
+        <a href="https://www.instagram.com/sabor_e_cia_1234/" target="_blank" class="insta-link">📸 Acesse nosso
+            Instagram</a>
+        <a href="<%= basePath %>/admin/login" class="insta-link">🔒 Área administrativa</a>
+    </footer>
+
+    <script>
+        const mes = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+        const agora = new Date();
+        document.getElementById('mes-atual').textContent =
+            `${mes[agora.getMonth()]} ${agora.getFullYear()}`;
+    </script>
+
+</body>
+
+</html>

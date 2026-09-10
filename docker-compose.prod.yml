@@ -1,0 +1,39 @@
+services:
+  fabrica-sabor_cia:
+    container_name: fabrica-sabor_cia
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: fabrica-sabor_cia:latest
+    restart: always
+    env_file:
+      - .env
+    environment:
+      NODE_ENV: production
+      PORT: ${PORT:-3000}
+      TRUST_PROXY: "true"
+      BASE_PATH: ${BASE_PATH:-/restaurante}
+      UPLOADS_DIR: /app/uploads
+    volumes:
+      - ${UPLOADS_DIR}:/app/uploads
+    expose:
+      - ${PORT:-3000}
+    networks:
+      - fabrica-network
+
+  # nginx:
+  #   image: nginx:1.27-alpine
+  #   container_name: fabrica-sabor_nginx
+  #   restart: always
+  #   depends_on:
+  #     - fabrica-sabor_cia
+  #   ports:
+  #     - "8080:80"
+  #   volumes:
+  #     - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+  #   networks:
+  #     - fabrica-network
+
+networks:
+  fabrica-network:
+    external: true

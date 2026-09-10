@@ -1,0 +1,68 @@
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - "v*.*.*"
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Deploy para Produção na VPS da BRDrive
+    runs-on: self-hosted
+
+    steps:
+      - name: 📂 Checkout do Código
+        uses: actions/checkout@v4
+
+      # --- STEP DE VALIDAÇÃO ---
+      - name: 🛡️ Validar Secrets Críticas
+        env:
+          SESSION_SECRET: ${{ secrets.SESSION_SECRET }}
+          ADMIN_EMAIL: ${{ secrets.ADMIN_EMAIL }}
+          ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
+          UPLOADS_DIR: ${{ secrets.UPLOADS_DIR }}
+        run: |
+          MISSING=0
+
+          for var in SESSION_SECRET ADMIN_EMAIL ADMIN_PASSWORD UPLOADS_DIR; do
+            if [ -z "${!var}" ]; then
+              echo "❌ ERRO: A secret '$var' não está configurada."
+              MISSING=1
+            fi
+          done
+
+          if [ "$MISSING" -eq 1 ]; then
+            echo "⛔ Deploy cancelado."
+            exit 1
+          fi
+
+          echo "✅ Todas as secrets obrigatórias estão presentes."
+
+      # ------------------------------
+
+      - name: 📄 Criar arquivo .env
+        run: |
+          cat > .env <<EOF
+          BASE_PATH=${{ secrets.BASE_PATH || '/restaurante' }}
+          PORT=${{ secrets.PORT || 3000 }}
+          SESSION_SECRET=${{ secrets.SESSION_SECRET }}
+          ADMIN_EMAIL=${{ secrets.ADMIN_EMAIL }}
+          ADMIN_PASSWORD=${{ secrets.ADMIN_PASSWORD }}
+          UPLOADS_DIR=${{ secrets.UPLOADS_DIR }}
+          EOF
+
+      - name: 🧹 Derrubar stack antiga
+        run: |
+          docker compose -f docker-compose.prod.yml down --remove-orphans || true
+
+      - name: 🚀 Build e subir stack
+        run: |
+          docker compose -f docker-compose.prod.yml up -d --build --remove-orphans
+
+      - name: ✅ Verificar container
+        run: |
+          docker ps --filter "name=fabrica-sabor_cia" --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"
+
+      - name: ♻️ Limpeza de imagens não utilizadas
+        run: docker image prune -f

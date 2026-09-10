@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administração | Sabor & Cia</title>
+    <link rel="stylesheet" href="<%= basePath %>/assets/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600&display=swap"
+        rel="stylesheet">
+</head>
+
+<body class="admin-page">
+    <main class="admin-shell admin-login-shell">
+        <section class="admin-panel admin-login-panel">
+            <div class="admin-kicker">Área restrita</div>
+            <h1>Entrar na administração</h1>
+            <p>Use seu e-mail e senha para acessar o painel de upload dos cardápios mensais.</p>
+
+            <% if (erro) { %>
+                <div class="admin-alert admin-alert-error">
+                    <%= erro %>
+                </div>
+                <% } %>
+
+                    <form class="admin-form" action="<%= basePath %>/admin/login" method="POST">
+                        <label>
+                            <span>E-mail</span>
+                            <input type="email" name="email" value="<%= emailPreenchido %>"
+                                placeholder="admin@exemplo.com" required>
+                        </label>
+
+                        <label>
+                            <span>Senha</span>
+                            <input type="password" name="senha" placeholder="Sua senha" required>
+                        </label>
+
+                        <button type="submit" class="btn-principal admin-submit">Entrar</button>
+                    </form>
+
+                    <a class="admin-link" href="<%= basePath %>">Voltar para o site</a>
+        </section>
+    </main>
+</body>
+
+</html>

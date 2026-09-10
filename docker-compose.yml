@@ -1,0 +1,19 @@
+services:
+  app:
+    container_name: fabrica-sabor_cia
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: sabor-cia:dev
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      NODE_ENV: development
+    command: npm run dev
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - ./uploads:/app/uploads
+    ports:
+      - ${PORT}:${PORT}

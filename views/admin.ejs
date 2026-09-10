@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Administrativo | Sabor & Cia</title>
+    <link rel="stylesheet" href="<%= basePath %>/assets/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600&display=swap"
+        rel="stylesheet">
+</head>
+
+<body class="admin-page">
+    <main class="admin-shell">
+        <section class="admin-panel admin-hero">
+            <div>
+                <div class="admin-back">
+                    <a class="admin-link" href="<%= basePath %>">← Voltar</a>
+                </div>
+                <div class="admin-kicker">Painel administrativo</div>
+                <h1>Cardápios mensais</h1>
+                <p>Faça upload de um PDF para cada mês do ano. O arquivo enviado substitui o cardápio anterior do mês e
+                    fica disponível para download público.</p>
+            </div>
+            <div class="admin-meta">
+                <span><strong>Logado como</strong>
+                    <%= adminEmail %>
+                </span>
+                <a class="admin-link" href="<%= basePath %>/admin/logout">Sair</a>
+            </div>
+        </section>
+
+        <% if (sucesso) { %>
+            <div class="admin-alert admin-alert-success">
+                <%= sucesso %>
+            </div>
+            <% } %>
+
+                <% if (erro) { %>
+                    <div class="admin-alert admin-alert-error">
+                        <%= erro %>
+                    </div>
+                    <% } %>
+
+                        <section class="admin-panel">
+                            <form class="admin-form admin-upload-form" action="<%= basePath %>/admin/cardapio"
+                                method="POST" enctype="multipart/form-data">
+                                <label>
+                                    <span>Ano</span>
+                                    <input type="number" name="ano" min="2000" max="2100" value="<%= anoSelecionado %>"
+                                        required>
+                                </label>
+
+                                <label>
+                                    <span>Mês</span>
+                                    <select name="mes" required>
+                                        <% meses.forEach((mes)=> { %>
+                                            <option value="<%= mes.slug %>">
+                                                <%= mes.numero %> - <%= mes.nome %>
+                                            </option>
+                                            <% }) %>
+                                    </select>
+                                </label>
+
+                                <label>
+                                    <span>Arquivo PDF</span>
+                                    <input type="file" name="cardapio" accept="application/pdf" required>
+                                </label>
+
+                                <button type="submit" class="btn-principal admin-submit">Enviar cardápio</button>
+                            </form>
+                        </section>
+
+                        <section class="admin-panel">
+                            <div class="admin-section-title">
+                                <h2>Status dos meses em <%= anoSelecionado %>
+                                </h2>
+                                <p>Verifique quais cardápios já estão disponíveis para download público.</p>
+                            </div>
+
+                            <div class="admin-grid">
+                                <% meses.forEach((mes)=> { %>
+                                    <article
+                                        class="admin-month-card <%= mes.disponivel ? 'is-available' : 'is-empty' %>">
+                                        <strong>
+                                            <%= mes.numero %> · <%= mes.nome %>
+                                        </strong>
+                                        <span>
+                                            <%= mes.disponivel ? 'Disponível' : 'Sem PDF' %>
+                                        </span>
+                                    </article>
+                                    <% }) %>
+                            </div>
+                        </section>
+    </main>
+
+</body>
+
+</html>

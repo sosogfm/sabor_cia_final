@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="manifest" href="<%= basePath %>/manifest.json">
+    <meta name="theme-color" content="#1e6b47">
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('<%= basePath %>/service-worker.js');
+        }
+    </script>
+
+    <link rel="stylesheet" href="<%= basePath %>/assets/css/style.css">
+
+    <link rel="icon" type="image/x-icon" href="<%= basePath %>/assets/img/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <title>Sabor & Cia</title>
+
+</head>
+
+<body>
+
+    <nav id="navbar">
+        <div class="logo">
+            <a href="<%= basePath %>">
+                <img src="assets/img/logo.png" alt="Sabor & Cia">
+            </a>
+        </div>
+        <ul id="menu">
+            <li><a href="<%= basePath %>/sobre" class="hover-nav">Sobre Nós</a></li>
+            <li><a href="<%= basePath %>/contato" class="hover-nav">Contato</a></li>
+        </ul>
+    </nav>
+
+    <main id="container">
+        <section class="hero">
+            <div class="hero-text">
+                <h1>Entre em <span class="destaque">Contato</span></h1>
+                <p>Tem uma dúvida, sugestão ou quer saber mais sobre o restaurante? A gente adoraria ouvir você!</p>
+            </div>
+            <div class="hero-deco">
+                <div class="circulo c1"></div>
+                <div class="circulo c2"></div>
+                <div class="emoji-float">💬</div>
+            </div>
+        </section>
+
+        <section class="contato-cards">
+            <h2>Informações</h2>
+            <p>Estamos disponíveis nos canais abaixo durante o horário de funcionamento.</p>
+            <div class="contato-grid">
+                <a href="https://api.whatsapp.com/send?phone=5549920016108" target="_blank" class="contato-card">
+                    <span class="info-icon">📞</span>
+                    <div>
+                        <strong>WhatsApp</strong>
+                        <p>(49) 92001-6108</p>
+                    </div>
+                </a>
+
+                <a href="https://www.instagram.com/sabor_e_cia_1234/" target="_blank" class="contato-card">
+                    <span class="info-icon">📸</span>
+                    <div>
+                        <strong>Instagram</strong>
+                        <p>@sabor_e_cia_1234</p>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+
+        <section class="mapa-section">
+            <h2>Como chegar</h2>
+            <p>Estamos localizados dentro do campus do IFC Videira.</p>
+            <div class="mapa-wrapper">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3554.1041091159273!2d-51.14520439999999!3d-27.026875999999994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94e14fa5b07c8fd5%3A0xfc69f726d4659812!2sInstituto%20Federal%20de%20Educa%C3%A7%C3%A3o%20Ci%C3%AAncia%20e%20Tecnologia%20Catarinense%20-%20Campus%20Videira!5e0!3m2!1sen!2sbr!4v1776104419159!5m2!1sen!2sbr"
+                    width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade" title="Localização IFC Videira">
+                </iframe>
+            </div>
+        </section>
+
+        <section class="feedback-section">
+            <h2>Deixe sua sugestão</h2>
+            <p>Sua opinião é muito importante para melhorarmos cada vez mais!</p>
+
+            <div id="sucesso" data-fs-success
+                style="display:none; color: green; font-weight: bold; margin-bottom: 15px;">
+                ✅ Mensagem recebida! Obrigado pelo seu contato.
+            </div>
+            <div id="erro" data-fs-error style="display:none; color: red; font-weight: bold; margin-bottom: 15px;">
+                ❌ Ocorreu um erro. Tente novamente mais tarde.
+            </div>
+
+            <form id="form-contato" action="https://formspree.io/f/mbdvjqya" method="POST" class="form-grupo">
+                <input type="text" name="nome" id="campo-nome" placeholder="Seu nome" maxlength="80" required
+                    data-fs-field>
+
+                <input type="email" name="email" id="campo-email" placeholder="Seu e-mail (opcional)" maxlength="120"
+                    data-fs-field>
+
+                <textarea name="mensagem" id="campo-mensagem" placeholder="Escreva sua sugestão ou dúvida..." required
+                    data-fs-field></textarea>
+
+                <button type="submit" class="btn-enviar" data-fs-submit-btn>Enviar mensagem ✉️</button>
+            </form>
+        </section>
+
+
+        <script>
+            window.formspree = window.formspree || function () { (formspree.q = formspree.q || []).push(arguments); };
+            formspree('initForm', {
+                formElement: '#form-contato',
+                formId: 'mbdvjqya',
+                onSuccess: function () {
+                    document.getElementById('form-contato').style.display = 'none';
+                    document.getElementById('sucesso').style.display = 'block';
+                }
+            });
+        </script>
+        <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
+
+
+
+    </main>
+
+    <footer>
+        <p>© 2026 Sabor & Cia · Fábrica de Software IFC Videira</p>
+        <a href="https://www.instagram.com/sabor_e_cia_1234/" target="_blank" class="insta-link">📸 Acesse nosso
+            Instagram</a>
+        <a href="<%= basePath %>/admin/login" class="insta-link">🔒 Área administrativa</a>
+    </footer>
+
+    <script>
+        const mes = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+        const agora = new Date();
+        const mesAtual = document.getElementById('mes-atual');
+        if (mesAtual) {
+            mesAtual.textContent = `${mes[agora.getMonth()]} ${agora.getFullYear()}`;
+        }
+    </script>
+
+</body>
+
+</html>

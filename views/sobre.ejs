@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="manifest" href="<%= basePath %>/manifest.json">
+    <meta name="theme-color" content="#1e6b47">
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('<%= basePath %>/service-worker.js');
+        }
+    </script>
+
+    <link rel="stylesheet" href="<%= basePath %>/assets/css/style.css">
+
+    <link rel="icon" type="image/x-icon" href="<%= basePath %>/assets/img/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <title>Sabor & Cia</title>
+
+</head>
+
+<body>
+    <nav id="navbar">
+        <div class="logo">
+            <a href="<%= basePath %>">
+                <img src="assets/img/logo.png" alt="Sabor & Cia">
+            </a>
+        </div>
+        <ul id="menu">
+            <li><a href="<%= basePath %>/sobre" class="hover-nav">Sobre Nós</a></li>
+            <li><a href="<%= basePath %>/contato" class="hover-nav">Contato</a></li>
+        </ul>
+    </nav>
+
+    <main id="container">
+
+        <section class="hero">
+            <div class="hero-text">
+                <h1>Sobre o <span class="destaque">Sabor & Cia</span></h1>
+                <p>Conheça quem está por trás de cada refeição servida com carinho no IFC Videira.</p>
+            </div>
+            <div class="hero-deco">
+                <div class="circulo c1"></div>
+                <div class="circulo c2"></div>
+                <div class="emoji-float">🌿</div>
+            </div>
+        </section>
+
+
+        <section class="sobre-intro">
+            <h2>Quem somos</h2>
+            <p>O Sabor & Cia é o restaurante universitário do IFC Videira, criado para oferecer refeições saborosas,
+                nutritivas e acessíveis para toda a comunidade acadêmica — alunos, professores e servidores.</p>
+            <p>Mais do que um espaço de alimentação, somos um ponto de encontro. Valorizamos ingredientes frescos, um
+                ambiente acolhedor e o prazer de comer bem no dia a dia.</p>
+        </section>
+
+        <section class="valores-section">
+            <h2>Nossos valores</h2>
+            <div class="valores-grid">
+                <div class="valor-card">
+                    <span class="valor-icon">🥗</span>
+                    <div>
+                        <strong>Alimentação saudável</strong>
+                        <p>Cardápios equilibrados, pensados para nutrir e dar energia durante o dia.</p>
+                    </div>
+                </div>
+                <div class="valor-card">
+                    <span class="valor-icon">♻️</span>
+                    <div>
+                        <strong>Sustentabilidade</strong>
+                        <p>Buscamos reduzir desperdícios e valorizar produtores locais da região.</p>
+                    </div>
+                </div>
+                <div class="valor-card">
+                    <span class="valor-icon">🤝</span>
+                    <div>
+                        <strong>Comunidade</strong>
+                        <p>Um espaço para todos, que faz parte da rotina do campus com afeto.</p>
+                    </div>
+                </div>
+                <div class="valor-card">
+                    <span class="valor-icon">📋</span>
+                    <div>
+                        <strong>Transparência</strong>
+                        <p>Cardápio atualizado todo mês e disponível para toda a comunidade.</p>
+                    </div>
+                </div>
+                <div class="valor-card">
+                    <span class="valor-icon">👩‍🍳</span>
+                    <div>
+                        <strong>Cuidado no preparo</strong>
+                        <p>Cada prato preparado com atenção e dedicação pela nossa equipe.</p>
+                    </div>
+                </div>
+                <div class="valor-card">
+                    <span class="valor-icon">💚</span>
+                    <div>
+                        <strong>Bem-estar</strong>
+                        <p>Acreditamos que comer bem é parte essencial de um bom desempenho acadêmico.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="equipe-section">
+            <p>Este site foi desenvolvido por estudantes do IFC Videira como parte do projeto <strong>Fábrica de
+                    Software</strong> — iniciativa que conecta tecnologia e comunidade dentro do campus.</p>
+            <span class="equipe-badge">🎓 IFC Videira · Fábrica de Software</span>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>© 2026 Sabor & Cia · Fábrica de Software IFC Videira</p>
+        <a href="https://www.instagram.com/sabor_e_cia_1234/" target="_blank" class="insta-link">📸 Acesse nosso
+            Instagram</a>
+        <a href="<%= basePath %>/admin/login" class="insta-link">🔒 Área administrativa</a>
+    </footer>
+
+</body>
+
+</html>
